@@ -1,8 +1,13 @@
 " Vim syntax file
-" Language:	java bytecode 
-" Maintainer:	Claudio Fleiner <claudio@fleiner.com>
-" URL:		http://www.fleiner.com/vim/syntax/bytecode.vim
-" Last change:	2001 Apr 26
+" Language: java bytecode
+" Maintainer: Pascal Germroth <pascal@ensieve.org>
+" URL: https://github.com/neapel/java-bytecode.vim/
+" Originally based on
+" Claudio Fleiner <claudio@fleiner.com>
+" http://www.fleiner.com/vim/syntax/bytecode.vim
+" Last change: 2001 Apr 26
+"
+" To highlight javap's output.
 
 " For version 5.x: Clear all syntax items
 " For version 6.x: Quit when a syntax file was already loaded
@@ -12,91 +17,452 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-syn keyword bcKeyword nop aconst_null iconst_m1 iconst_0 iconst_1 iconst_2 iconst_3 iconst_4 iconst_5
-syn keyword bcKeyword lconst_0 lconst_1 fconst_0 fconst_1 fconst_2 dconst_0 dconst_1 bipush
-syn keyword bcKeyword sipush ldc ldc_w ldc2_w iload lload fload dload
-syn keyword bcKeyword aload iload_0 iload_1 iload_2 iload_3 lload_0 lload_1 lload_2
-syn keyword bcKeyword lload_3 fload_0 fload_1 fload_2 fload_3 dload_0 dload_1 dload_2
-syn keyword bcKeyword dload_3 aload_0 aload_1 aload_2 aload_3 iaload laload faload
-syn keyword bcKeyword daload aaload baload caload saload istore lstore fstore
-syn keyword bcKeyword dstore astore istore_0 istore_1 istore_2 istore_3 lstore_0 lstore_1
-syn keyword bcKeyword lstore_2 lstore_3 fstore_0 fstore_1 fstore_2 fstore_3 dstore_0 dstore_1
-syn keyword bcKeyword dstore_2 dstore_3 astore_0 astore_1 astore_2 astore_3 iastore lastore
-syn keyword bcKeyword fastore dastore aastore bastore castore sastore pop pop2
-syn keyword bcKeyword dup dup_x1 dup_x2 dup2 dup2_x1 dup2_x2 swap iadd
-syn keyword bcKeyword ladd fadd dadd isub lsub fsub dsub imul
-syn keyword bcKeyword lmul fmul dmul idiv ldiv fdiv ddiv irem
-syn keyword bcKeyword lrem frem drem ineg lneg fneg dneg ishl
-syn keyword bcKeyword lshl ishr lshr iushr lushr iand land ior
-syn keyword bcKeyword lor ixor lxor iinc i2l i2f i2d l2i
-syn keyword bcKeyword l2f l2d f2i f2l f2d d2i d2l d2f
-syn keyword bcKeyword i2b i2c i2s lcmp fcmpl fcmpg dcmpl dcmpg
-syn keyword bcKeyword ifeq ifne iflt ifge ifgt ifle if_icmpeq if_icmpne
-syn keyword bcKeyword if_icmplt if_icmpge if_icmpgt if_icmple if_acmpeq if_acmpne goto jsr
-syn keyword bcKeyword ret tableswitch lookupswitch ireturn lreturn freturn dreturn areturn
-syn keyword bcKeyword return getstatic putstatic getfield putfield invokevirtual invokespecial invokestatic
-syn keyword bcKeyword invokeinterface new newarray anewarray arraylength athrow checkcast instanceof
-syn keyword bcKeyword monitorenter monitorexit wide multianewarray ifnull ifnonnull goto_w jsr_w
-syn keyword bcKeyword breakpoint ldc_quick ldc_w_quick ldc2_w_quick getfield_quick putfield_quick getfield2_quick putfield2_quick
-syn keyword bcKeyword getstatic_quick putstatic_quick getstatic2_quick putstatic2_quick invokevirtual_quck invokenonvirtual_quick invokesuper_quick invokestatic_quick
-syn keyword bcKeyword invokeinterface_quick aastore_quick new_quick anewarray_quick multianewarray_quick checkcast_quick instanceof_quick invokevirtual_quick_w
-syn keyword bcKeyword getfield_quick_w putfield_quick_w nonnull_quick agetfield_quick aputfield_quick agetstatic_quick aputstatic_quick aldc_quick
-syn keyword bcKeyword aldc_w_quick exit_sync_method sethi load_word_index load_short_index load_char_index load_byte_index load_ubyte_index
-syn keyword bcKeyword store_word_index nastore_word_index store_short_index store_byte_index
+" from http://en.wikipedia.org/wiki/Java_bytecode_instruction_listings
 
-syn keyword bcPicoKeyword load_ubyte load_byte load_char load_short load_word priv_ret_from_trap priv_read_dcache_tag priv_read_dcache_data
-syn keyword bcPicoKeyword load_char_oe load_short_oe load_word_oe return0 priv_read_icache_tag priv_read_icache_data ncload_ubyte ncload_byte
-syn keyword bcPicoKeyword ncload_char ncload_short ncload_word iucmp priv_powerdown cache_invalidate ncload_char_oe ncload_short_oe
-syn keyword bcPicoKeyword ncload_word_oe return1 cache_flush cache_index_flush store_byte store_short store_word soft_trap
-syn keyword bcPicoKeyword priv_write_dcache_tag priv_write_dcache_data store_short_oe store_word_oe return2 priv_write_icache_tag priv_write_icache_data ncstore_byte
-syn keyword bcPicoKeyword ncstore_short ncstore_word priv_reset get_current_class ncstore_short_oe ncstore_word_oe call zero_line
-syn keyword bcPicoKeyword priv_update_optop read_pc read_vars read_frame read_optop priv_read_oplim read_const_pool priv_read_psr
-syn keyword bcPicoKeyword priv_read_trapbase priv_read_lockcount0 priv_read_lockcount1 priv_read_lockaddr0 priv_read_lockaddr1 priv_read_userrange1 priv_read_gc_config priv_read_brk1a
-syn keyword bcPicoKeyword priv_read_brk2a priv_read_brk12c priv_read_versionid priv_read_hcr priv_read_sc_bottom read_global0 read_global1 read_global2
-syn keyword bcPicoKeyword read_global3 write_pc write_vars write_frame write_optop priv_write_oplim write_const_pool priv_write_psr
-syn keyword bcPicoKeyword priv_write_trapbase priv_write_lockcount0 priv_write_lockcount1 priv_write_lockaddr0 priv_write_lockaddr1 priv_write_userrange1 priv_write_gc_config priv_write_brk1a
-syn keyword bcPicoKeyword priv_write_brk2a priv_write_brk12c priv_red_userrange2 priv_write_sc_bottom write_global0 write_global1 write_global2 write_global3
+" no stack op
+syn keyword bcInstructionNop nop
+"[No change]	perform no operation
+syn keyword bcInstructionNop iinc
+"[No change]	increment local variable #index by signed byte const
 
-" assembler directives
-syn match bcDirectives "\s\.\(type\|section\|sectioninfo\|sectionflag\|previous\|\d\=byte\|string\|ascii\|align\|size\|extern\|text\|set\|ident\|equ\|end\|block\)\>"ms=s+1
-syn match bcGlobal "\s\.global\>"ms=s+1
+" push to stash
+syn keyword bcInstructionPush aconst_null
+"→ null	push a null reference onto the stack
+syn keyword bcInstructionPush iconst_m1
+"→ -1	load the int value -1 onto the stack
+syn keyword bcInstructionPush iconst_0
+"→ 0	load the int value 0 onto the stack
+syn keyword bcInstructionPush iconst_1
+"→ 1	load the int value 1 onto the stack
+syn keyword bcInstructionPush iconst_2
+"→ 2	load the int value 2 onto the stack
+syn keyword bcInstructionPush iconst_3
+"→ 3	load the int value 3 onto the stack
+syn keyword bcInstructionPush iconst_4
+"→ 4	load the int value 4 onto the stack
+syn keyword bcInstructionPush iconst_5
+"→ 5	load the int value 5 onto the stack
+syn keyword bcInstructionPush lconst_0
+"→ 0L	push the long 0 onto the stack
+syn keyword bcInstructionPush lconst_1
+"→ 1L	push the long 1 onto the stack
+syn keyword bcInstructionPush fconst_0
+"→ 0.0f	push 0.0f on the stack
+syn keyword bcInstructionPush fconst_1
+"→ 1.0f	push 1.0f on the stack
+syn keyword bcInstructionPush fconst_2
+"→ 2.0f	push 2.0f on the stack
+syn keyword bcInstructionPush dconst_0
+"→ 0.0	push the constant 0.0 onto the stack
+syn keyword bcInstructionPush dconst_1
+"→ 1.0	push the constant 1.0 onto the stack
+syn keyword bcInstructionPush iload_0
+"→ value	load an int value from local variable 0
+syn keyword bcInstructionPush iload_1
+"→ value	load an int value from local variable 1
+syn keyword bcInstructionPush iload_2
+"→ value	load an int value from local variable 2
+syn keyword bcInstructionPush iload_3
+"→ value	load an int value from local variable 3
+syn keyword bcInstructionPush lload_0
+"→ value	load a long value from a local variable 0
+syn keyword bcInstructionPush lload_1
+"→ value	load a long value from a local variable 1
+syn keyword bcInstructionPush lload_2
+"→ value	load a long value from a local variable 2
+syn keyword bcInstructionPush lload_3
+"→ value	load a long value from a local variable 3
+syn keyword bcInstructionPush fload_0
+"→ value	load a float value from local variable 0
+syn keyword bcInstructionPush fload_1
+"→ value	load a float value from local variable 1
+syn keyword bcInstructionPush fload_2
+"→ value	load a float value from local variable 2
+syn keyword bcInstructionPush fload_3
+"→ value	load a float value from local variable 3
+syn keyword bcInstructionPush dload_0
+"→ value	load a double from local variable 0
+syn keyword bcInstructionPush dload_1
+"→ value	load a double from local variable 1
+syn keyword bcInstructionPush dload_2
+"→ value	load a double from local variable 2
+syn keyword bcInstructionPush dload_3
+"→ value	load a double from local variable 3
+syn keyword bcInstructionPush aload_0
+"→ objectref	load a reference onto the stack from local variable 0
+syn keyword bcInstructionPush aload_1
+"→ objectref	load a reference onto the stack from local variable 1
+syn keyword bcInstructionPush aload_2
+"→ objectref	load a reference onto the stack from local variable 2
+syn keyword bcInstructionPush aload_3
+"→ objectref	load a reference onto the stack from local variable 3
+syn keyword bcInstructionPush bipush
+"→ value	push a byte onto the stack as an integer value
+syn keyword bcInstructionPush sipush
+"→ value	push a short onto the stack
+syn keyword bcInstructionPush ldc
+"→ value	push a constant #index from a constant pool (String, int or float) onto the stack
+syn keyword bcInstructionPush ldc_w
+"→ value	push a constant #index from a constant pool (String, int or float) onto the stack (wide index is constructed as indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionPush ldc2_w
+"→ value	push a constant #index from a constant pool (double or long) onto the stack (wide index is constructed as indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionPush iload
+"→ value	load an int value from a local variable #index
+syn keyword bcInstructionPush lload
+"→ value	load a long value from a local variable #index
+syn keyword bcInstructionPush fload
+"→ value	load a float value from a local variable #index
+syn keyword bcInstructionPush dload
+"→ value	load a double value from a local variable #index
+syn keyword bcInstructionPush aload
+"→ objectref	load a reference onto the stack from a local variable #index
 
-" Comments
-syn match bcComment "!.*$"
+" pop stack
+syn keyword bcInstructionPop istore
+"value →	store int value into variable #index
+syn keyword bcInstructionPop lstore
+"value →	store a long value in a local variable #index
+syn keyword bcInstructionPop fstore
+"value →	store a float value into a local variable #index
+syn keyword bcInstructionPop dstore
+"value →	store a double value into a local variable #index
+syn keyword bcInstructionPop astore
+"objectref →	store a reference into a local variable #index
+syn keyword bcInstructionPop istore_0
+"value →	store int value into variable 0
+syn keyword bcInstructionPop istore_1
+"value →	store int value into variable 1
+syn keyword bcInstructionPop istore_2
+"value →	store int value into variable 2
+syn keyword bcInstructionPop istore_3
+"value →	store int value into variable 3
+syn keyword bcInstructionPop lstore_0
+"value →	store a long value in a local variable 0
+syn keyword bcInstructionPop lstore_1
+"value →	store a long value in a local variable 1
+syn keyword bcInstructionPop lstore_2
+"value →	store a long value in a local variable 2
+syn keyword bcInstructionPop lstore_3
+"value →	store a long value in a local variable 3
+syn keyword bcInstructionPop fstore_0
+"value →	store a float value into local variable 0
+syn keyword bcInstructionPop fstore_1
+"value →	store a float value into local variable 1
+syn keyword bcInstructionPop fstore_2
+"value →	store a float value into local variable 2
+syn keyword bcInstructionPop fstore_3
+"value →	store a float value into local variable 3
+syn keyword bcInstructionPop dstore_0
+"value →	store a double into local variable 0
+syn keyword bcInstructionPop dstore_1
+"value →	store a double into local variable 1
+syn keyword bcInstructionPop dstore_2
+"value →	store a double into local variable 2
+syn keyword bcInstructionPop dstore_3
+"value →	store a double into local variable 3
+syn keyword bcInstructionPop astore_0
+"objectref →	store a reference into local variable 0
+syn keyword bcInstructionPop astore_1
+"objectref →	store a reference into local variable 1
+syn keyword bcInstructionPop astore_2
+"objectref →	store a reference into local variable 2
+syn keyword bcInstructionPop astore_3
+"objectref →	store a reference into local variable 3
+syn keyword bcInstructionPop iastore
+"arrayref, index, value →	store an int into an array
+syn keyword bcInstructionPop lastore
+"arrayref, index, value →	store a long to an array
+syn keyword bcInstructionPop fastore
+"arrayref, index, value →	store a float in an array
+syn keyword bcInstructionPop dastore
+"arrayref, index, value →	store a double into an array
+syn keyword bcInstructionPop aastore
+"arrayref, index, value →	store into a reference in an array
+syn keyword bcInstructionPop bastore
+"arrayref, index, value →	store a byte or Boolean value into an array
+syn keyword bcInstructionPop castore
+"arrayref, index, value →	store a char into an array
+syn keyword bcInstructionPop sastore
+"arrayref, index, value →	store short to array
+syn keyword bcInstructionPop pop
+"value →	discard the top value on the stack
+syn keyword bcInstructionPop pop2
+"{value2, value1} →	discard the top two values on the stack (or one value, if it is a double or long)
+
+" modify stack
+syn keyword bcInstructionMod iaload
+"arrayref, index → value	load an int from an array
+syn keyword bcInstructionMod laload
+"arrayref, index → value	load a long from an array
+syn keyword bcInstructionMod faload
+"arrayref, index → value	load a float from an array
+syn keyword bcInstructionMod daload
+"arrayref, index → value	load a double from an array
+syn keyword bcInstructionMod aaload
+"arrayref, index → value	load onto the stack a reference from an array
+syn keyword bcInstructionMod baload
+"arrayref, index → value	load a byte or Boolean value from an array
+syn keyword bcInstructionMod caload
+"arrayref, index → value	load a char from an array
+syn keyword bcInstructionMod saload
+"arrayref, index → value	load short from array
+syn keyword bcInstructionMod dup
+"value → value, value	duplicate the value on top of the stack
+syn keyword bcInstructionMod dup_x1
+"value2, value1 → value1, value2, value1	insert a copy of the top value into the stack two values from the top. value1 and value2 must not be of the type double or long.
+syn keyword bcInstructionMod dup_x2
+"value3, value2, value1 → value1, value3, value2, value1	insert a copy of the top value into the stack two (if value2 is double or long it takes up the entry of value3, too) or three values (if value2 is neither double nor long) from the top
+syn keyword bcInstructionMod dup2
+"{value2, value1} → {value2, value1}, {value2, value1}	duplicate top two stack words (two values, if value1 is not double nor long; a single value, if value1 is double or long)
+syn keyword bcInstructionMod dup2_x1
+"value3, {value2, value1} → {value2, value1}, value3, {value2, value1}	duplicate two words and insert beneath third word (see explanation above)
+syn keyword bcInstructionMod dup2_x2
+"{value4, value3}, {value2, value1} → {value2, value1}, {value4, value3}, {value2, value1}	duplicate two words and insert beneath fourth word
+syn keyword bcInstructionMod swap
+"value2, value1 → value1, value2	swaps two top words on the stack (note that value1 and value2 must not be double or long)
+syn keyword bcInstructionMod iadd
+"value1, value2 → result	add two ints
+syn keyword bcInstructionMod ladd
+"value1, value2 → result	add two longs
+syn keyword bcInstructionMod fadd
+"value1, value2 → result	add two floats
+syn keyword bcInstructionMod dadd
+"value1, value2 → result	add two doubles
+syn keyword bcInstructionMod isub
+"value1, value2 → result	int subtract
+syn keyword bcInstructionMod lsub
+"value1, value2 → result	subtract two longs
+syn keyword bcInstructionMod fsub
+"value1, value2 → result	subtract two floats
+syn keyword bcInstructionMod dsub
+"value1, value2 → result	subtract a double from another
+syn keyword bcInstructionMod imul
+"value1, value2 → result	multiply two integers
+syn keyword bcInstructionMod lmul
+"value1, value2 → result	multiply two longs
+syn keyword bcInstructionMod fmul
+"value1, value2 → result	multiply two floats
+syn keyword bcInstructionMod dmul
+"value1, value2 → result	multiply two doubles
+syn keyword bcInstructionMod idiv
+"value1, value2 → result	divide two integers
+syn keyword bcInstructionMod ldiv
+"value1, value2 → result	divide two longs
+syn keyword bcInstructionMod fdiv
+"value1, value2 → result	divide two floats
+syn keyword bcInstructionMod ddiv
+"value1, value2 → result	divide two doubles
+syn keyword bcInstructionMod irem
+"value1, value2 → result	logical int remainder
+syn keyword bcInstructionMod lrem
+"value1, value2 → result	remainder of division of two longs
+syn keyword bcInstructionMod frem
+"value1, value2 → result	get the remainder from a division between two floats
+syn keyword bcInstructionMod drem
+"value1, value2 → result	get the remainder from a division between two doubles
+syn keyword bcInstructionMod ineg
+"value → result	negate int
+syn keyword bcInstructionMod lneg
+"value → result	negate a long
+syn keyword bcInstructionMod fneg
+"value → result	negate a float
+syn keyword bcInstructionMod dneg
+"value → result	negate a double
+syn keyword bcInstructionMod ishl
+"value1, value2 → result	int shift left
+syn keyword bcInstructionMod lshl
+"value1, value2 → result	bitwise shift left of a long value1 by int value2 positions
+syn keyword bcInstructionMod ishr
+"value1, value2 → result	int arithmetic shift right
+syn keyword bcInstructionMod lshr
+"value1, value2 → result	bitwise shift right of a long value1 by int value2 positions
+syn keyword bcInstructionMod iushr
+"value1, value2 → result	int logical shift right
+syn keyword bcInstructionMod lushr
+"value1, value2 → result	bitwise shift right of a long value1 by int value2 positions, unsigned
+syn keyword bcInstructionMod iand
+"value1, value2 → result	perform a bitwise and on two integers
+syn keyword bcInstructionMod land
+"value1, value2 → result	bitwise and of two longs
+syn keyword bcInstructionMod ior
+"value1, value2 → result	bitwise int or
+syn keyword bcInstructionMod lor
+"value1, value2 → result	bitwise or of two longs
+syn keyword bcInstructionMod ixor
+"value1, value2 → result	int xor
+syn keyword bcInstructionMod lxor
+"value1, value2 → result	bitwise exclusive or of two longs
+syn keyword bcInstructionMod i2l
+"value → result	convert an int into a long
+syn keyword bcInstructionMod i2f
+"value → result	convert an int into a float
+syn keyword bcInstructionMod i2d
+"value → result	convert an int into a double
+syn keyword bcInstructionMod l2i
+"value → result	convert a long to a int
+syn keyword bcInstructionMod l2f
+"value → result	convert a long to a float
+syn keyword bcInstructionMod l2d
+"value → result	convert a long to a double
+syn keyword bcInstructionMod f2i
+"value → result	convert a float to an int
+syn keyword bcInstructionMod f2l
+"value → result	convert a float to a long
+syn keyword bcInstructionMod f2d
+"value → result	convert a float to a double
+syn keyword bcInstructionMod d2i
+"value → result	convert a double to an int
+syn keyword bcInstructionMod d2l
+"value → result	convert a double to a long
+syn keyword bcInstructionMod d2f
+"value → result	convert a double to a float
+syn keyword bcInstructionMod i2b
+"value → result	convert an int into a byte
+syn keyword bcInstructionMod i2c
+"value → result	convert an int into a character
+syn keyword bcInstructionMod i2s
+"value → result	convert an int into a short
+syn keyword bcInstructionMod lcmp
+"value1, value2 → result	compare two longs values
+syn keyword bcInstructionMod fcmpl
+"value1, value2 → result	compare two floats
+syn keyword bcInstructionMod fcmpg
+"value1, value2 → result	compare two floats
+syn keyword bcInstructionMod dcmpl
+"value1, value2 → result	compare two doubles
+syn keyword bcInstructionMod dcmpg
+"value1, value2 → result	compare two doubles
+
+" branch
+syn keyword bcInstructionBranch ifeq
+"value →	if value is 0, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch ifne
+"value →	if value is not 0, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch iflt
+"value →	if value is less than 0, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch ifge
+"value →	if value is greater than or equal to 0, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch ifgt
+"value →	if value is greater than 0, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch ifle
+"value →	if value is less than or equal to 0, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch if_icmpeq
+"value1, value2 →	if ints are equal, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch if_icmpne
+"value1, value2 →	if ints are not equal, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch if_icmplt
+"value1, value2 →	if value1 is less than value2, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch if_icmpge
+"value1, value2 →	if value1 is greater than or equal to value2, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch if_icmpgt
+"value1, value2 →	if value1 is greater than value2, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch if_icmple
+"value1, value2 →	if value1 is less than or equal to value2, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch if_acmpeq
+"value1, value2 →	if references are equal, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch if_acmpne
+"value1, value2 →	if references are not equal, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch goto
+"[no change]	goes to another instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch jsr
+"→ address	jump to subroutine at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2) and place the return address on the stack
+syn keyword bcInstructionBranch ret
+"[No change]	continue execution from address taken from a local variable #index (the asymmetry with jsr is intentional)
+syn keyword bcInstructionBranch tableswitch
+"index →	continue execution from an address in the table at offset index
+syn keyword bcInstructionBranch lookupswitch
+"key →	a target address is looked up from a table using a key and execution continues from the instruction at that address
+syn keyword bcInstructionBranch ireturn
+"value → [empty]	return an integer from a method
+syn keyword bcInstructionBranch lreturn
+"value → [empty]	return a long value
+syn keyword bcInstructionBranch freturn
+"value → [empty]	return a float
+syn keyword bcInstructionBranch dreturn
+"value → [empty]	return a double from a method
+syn keyword bcInstructionBranch areturn
+"objectref → [empty]	return a reference from a method
+syn keyword bcInstructionBranch return
+"→ [empty]	return void from method
+syn keyword bcInstructionBranch ifnull
+"value →	if value is null, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch ifnonnull
+"value →	if value is not null, branch to instruction at branchoffset (signed short constructed from unsigned bytes branchbyte1 << 8 + branchbyte2)
+syn keyword bcInstructionBranch goto_w
+"[no change]	goes to another instruction at branchoffset (signed int constructed from unsigned bytes branchbyte1 << 24 + branchbyte2 << 16 + branchbyte3 << 8 + branchbyte4)
+syn keyword bcInstructionBranch jsr_w
+"→ address	jump to subroutine at branchoffset (signed int constructed from unsigned bytes branchbyte1 << 24 + branchbyte2 << 16 + branchbyte3 << 8 + branchbyte4) and place the return address on the stack
+
+
+" high level
+syn keyword bcInstructionHigh getstatic
+"→ value	get a static field value of a class, where the field is identified by field reference in the constant pool index (index1 << 8 + index2)
+syn keyword bcInstructionHigh putstatic
+"value →	set static field to value in a class, where the field is identified by a field reference index in constant pool (indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionHigh getfield
+"objectref → value	get a field value of an object objectref, where the field is identified by field reference in the constant pool index (index1 << 8 + index2)
+syn keyword bcInstructionHigh putfield
+"objectref, value →	set field to value in an object objectref, where the field is identified by a field reference index in constant pool (indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionHigh invokevirtual
+"objectref, [arg1, arg2, ...] →	invoke virtual method on object objectref, where the method is identified by method reference index in constant pool (indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionHigh invokespecial
+"objectref, [arg1, arg2, ...] →	invoke instance method on object objectref, where the method is identified by method reference index in constant pool (indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionHigh invokestatic
+"[arg1, arg2, ...] →	invoke a static method, where the method is identified by method reference index in constant pool (indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionHigh invokeinterface
+"objectref, [arg1, arg2, ...] →	invokes an interface method on object objectref, where the interface method is identified by method reference index in constant pool (indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionHigh invokedynamic
+"[arg1, [arg2 ...]] →	invokes a dynamic method identified by method reference index in constant pool (indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionHigh new
+"→ objectref	create new object of type identified by class reference in constant pool index (indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionHigh newarray
+"count → arrayref	create new array with count elements of primitive type identified by atype
+syn keyword bcInstructionHigh anewarray
+"count → arrayref	create a new array of references of length count and component type identified by the class reference index (indexbyte1 << 8 + indexbyte2) in the constant pool
+syn keyword bcInstructionHigh arraylength
+"arrayref → length	get the length of an array
+syn keyword bcInstructionHigh athrow
+"objectref → [empty], objectref	throws an error or exception (notice that the rest of the stack is cleared, leaving only a reference to the Throwable)
+syn keyword bcInstructionHigh checkcast
+"objectref → objectref	checks whether an objectref is of a certain type, the class reference of which is in the constant pool at index (indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionHigh instanceof
+"objectref → result	determines if an object objectref is of a given type, identified by class reference index in constant pool (indexbyte1 << 8 + indexbyte2)
+syn keyword bcInstructionHigh monitorenter
+"objectref →	enter monitor for object ("grab the lock" - start of synchronized() section)
+syn keyword bcInstructionHigh monitorexit
+"objectref →	exit monitor for object ("release the lock" - end of synchronized() section)
+syn keyword bcInstructionHigh wide
+"[same as for corresponding instructions]	execute opcode, where opcode is either iload, fload, aload, lload, dload, istore, fstore, astore, lstore, dstore, or ret, but assume the index is 16 bit; or execute iinc, where the index is 16 bits and the constant to increment by is a signed 16 bit short
+syn keyword bcInstructionHigh multianewarray
+"count1, [count2,...] → arrayref	create a new array of dimensions dimensions with elements of type identified by class reference in constant pool index (indexbyte1 << 8 + indexbyte2); the sizes of each dimension is identified by count1, [count2, etc.]
+
+" modifier keywords
+syn keyword bcJavaKeyword transient strictfp serializable synchronized static final volatile protected public private abstract class interface implements enum extends this
+syn match bcJavaKeyword /{}/
+
 syn match bcComment "//.*$"
-syn region bcComment start="/\*" end="\*/"
+syn match bcMetaTable /^\s*\[.*$/ contained nextgroup=bcMetaTable skipnl
+syn match bcMetaLines /^\s*Line numbers:\s*$/ nextgroup=bcMetaTable skipnl
+syn match bcMetaLocals /^\s*Local variable table:\s*$/ nextgroup=bcMetaTable skipnl
 
-"integer number, or floating point number without a dot and with "f".
-syn case ignore
-syn match	bcNumber		"\<\d\+\(u\=l\=\|lu\|f\)\>"
-"floating point number, with dot, optional exponent
-syn match	bcFloat		"\<\d\+\.\d*\(e[-+]\=\d\+\)\=[fl]\=\>"
-"floating point number, starting with a dot, optional exponent
-syn match	bcFloat		"\.\d\+\(e[-+]\=\d\+\)\=[fl]\=\>"
-"floating point number, without dot, with exponent
-syn match	bcFloat		"\<\d\+e[-+]\=\d\+[fl]\=\>"
-"hex number
-syn match	bcNumber		"\<0x\x\+\(u\=l\=\|lu\)\>"
-" flag an octal number with wrong digits
-syn match	bcOctalError	"\<0\o*[89]"
-syn case match
+" type names
+syn keyword bcJavaType boolean char byte short int long float double void
+syn match bcQualifiedType /[_$a-zA-Z][_$a-zA-Z0-9]*\(\.[_$a-zA-Z][_$a-zA-Z0-9]*\)\+\(\[\]\)\?/ contained
 
-" Line (output from gdb only)
-syn match bcLine "0x\x\+ <[^:]\+:"
+syn match bcOffset /^\s*[0-9]\+\s\?/
+syn match bcConstantID /\[[0-9]\+\]\s*$/
 
-"Address name (output from gdb only)
-syn match bcAddress "<[^>]\+>"
+" literals
+syn match  bcSpecialChar /\\\([4-9]\d\|[0-3]\d\d\|[\"\\'ntbrf]\|u\x\{4\}\)/ contained
+syn region bcString start=/\v"/ skip=/\v\\./ end=/\v"/ contained contains=bcSpecialChar
+syn region bcLiteral start=/</ end=/>/ contains=bcString
+"syn region bcLiteral start=/</ end=/>/
+"<[^>]*>"
 
-" Labels
-syn match bcLabel "^[A-Za-z.]\S*:"me=e-1
-" syn match bcLabel "@@:\=\i\+"
-" syn match bcCommands "^%\i\+"
-" syn match bcCommands "%%"
-
-syn match  bcSpecialError     contained "\\."
-syn match  bcSpecialCharError contained "[^']"
-syn match  bcSpecialChar      contained "\\\([4-9]\d\|[0-3]\d\d\|[\"\\'ntbrf]\|u\x\{4\}\)"
-syn region bcString           start=+"+  skip=+\\\\\|\\"+  end=+"+  contains=bcSpecialChar,bcSpecialError
+" invokestatic pkg.Class.fun(tp, tp) : returntype
+syn match bcInvoke /[_$a-zA-Z][_$a-zA-Z0-9]*\s*(/me=e-1
+syn region bcParams start=/(/ end=/)/ contains=bcJavaType,bcQualifiedType
+syn match bcType /\s:\s*[_$a-zA-Z][_$a-zA-Z0-9]*/ms=s+2 contains=bcJavaType,bcQualifiedType
 
 " Define the default highlighting.
 " For version 5.7 and earlier: only when not done already
@@ -109,25 +475,28 @@ if version >= 508 || !exists("did_bc_syn_inits")
     command -nargs=+ HiLink hi def link <args>
   endif
   let did_bc_syntax_inits = 1
-  HiLink bcKeyword     Statement
-  HiLink bcPicoKeyword Exception
-  HiLink bcNumber     Number
-  HiLink bcFloat      Number
-  HiLink bcOctalError Error
-  HiLink bcDirectives PreProc
+  HiLink bcInstructionNop Statement
+  HiLink bcInstructionPush Statement
+  HiLink bcInstructionPop Statement
+  HiLink bcInstructionMod Statement
+  HiLink bcInstructionBranch Statement
+  HiLink bcInstructionHigh Statement
 
-  HiLink bcLine       Function
-  HiLink bcComment    Comment
-  HiLink bcAddress    Type
-  HiLink bcConstant   Boolean
-  HiLink bcAnnot      StorageClass
-  HiLink bcCommands   Debug
+  HiLink bcJavaKeyword PreProc
 
-  HiLink bcGlobal      Function
-  HiLink bcLabel      Label
-  HiLink bcString     String
-  HiLink bcPreCondit	PreCondit
-  HiLink bcInclude	Include
-  HiLink bcIncluded	String
+  HiLink bcOffset LineNr
+  HiLink bcConstantID Special
+
+  HiLink bcInvoke Function
+  HiLink bcJavaType Type
+  HiLink bcQualifiedType Type
+
+  HiLink bcSpecialChar PreProc
+  HiLink bcString String
+  HiLink bcLiteral Constant
+  HiLink bcComment Comment
+  HiLink bcMetaTable Comment
+  HiLink bcMetaLines Comment
+  HiLink bcMetaLocals Comment
   delcommand HiLink
-endif 
+endif
