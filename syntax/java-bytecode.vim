@@ -441,6 +441,7 @@ syn keyword bcJavaKeyword transient strictfp serializable synchronized static fi
 syn match bcJavaKeyword /{}/
 
 syn match bcComment "//.*$"
+syn match jasminComment "^\s*;.*$"
 syn match bcMetaTable /^\s*\[.*$/ contained nextgroup=bcMetaTable skipnl
 syn match bcMetaLines /^\s*Line numbers:\s*$/ nextgroup=bcMetaTable skipnl
 syn match bcMetaLocals /^\s*Local variable table:\s*$/ nextgroup=bcMetaTable skipnl
@@ -495,6 +496,7 @@ if version >= 508 || !exists("did_bc_syn_inits")
   HiLink bcString String
   HiLink bcLiteral Constant
   HiLink bcComment Comment
+  HiLink jasminComment Comment
   HiLink bcMetaTable Comment
   HiLink bcMetaLines Comment
   HiLink bcMetaLocals Comment
